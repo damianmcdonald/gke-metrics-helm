@@ -1,0 +1,28 @@
+# Default values for api-reco.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# Global values
+namespace: dev-poc
+
+# Manifest specific values
+persistentvolume:
+  name: pv-nfs
+  accessMode: ReadWriteMany
+  storage: 1Ti
+  storageClassName: slow
+  volumeMode: Filesystem
+  nfsServerIP: 10.11.12.13
+  nfsServerPath: /nfs_poc
+
+persistentvolumeclaim:
+  name: nfs-claim
+
+configmap:
+  name: poc-configmap
+  apiService: api-service
+  apiPort: 8080
+  nfsServerIP: 10.11.12.13
+  nfsServerPath: /nfs_poc
+  redisServerIP: 172.18.226.3
+  redisServerPort: 6379

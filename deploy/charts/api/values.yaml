@@ -1,0 +1,31 @@
+# Default values for api-reco.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# Global values
+name: api
+namespace: dev-poc
+minReplicas: 1
+maxReplicas: 2
+
+# Manifest specific values
+persistentvolumeclaim:
+  name: nfs-claim
+  
+configmap:
+  name: poc-configmap
+
+deployment:
+  image: path.some.image/image:1.0.0
+
+hpa:
+  name: api-cpu
+  averageValue: 75
+
+service:
+  name: api-service
+  nodePort: 30226
+  port: 8080
+  targetPort: 8080
+  type: LoadBalancer
+  protocol: TCP

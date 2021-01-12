@@ -1,0 +1,12 @@
+apiVersion: v1
+data:
+  API_PORT: {{ .Values.configmap.apiPort | quote }}
+  API_SERVICE: {{ .Values.configmap.apiService }}
+  NFS_SERVER_IP: {{ .Values.configmap.nfsServerIP }}
+  NFS_SERVER_PATH: {{ .Values.configmap.nfsServerPath | quote }}
+  REDIS_SERVER_IP: {{ .Values.configmap.redisServerIP }}
+  REDIS_SERVER_PORT: {{ .Values.configmap.redisServerPort | quote }}
+kind: ConfigMap
+metadata:
+  name: {{ .Values.configmap.name }}
+  namespace: {{ .Values.namespace }}

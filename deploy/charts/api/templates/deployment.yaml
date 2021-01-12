@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.name }}
+  name: {{ .Values.name }}
+  namespace: {{ .Values.namespace }}
+spec:
+  progressDeadlineSeconds: 600
+  replicas: {{ .Values.minReplicas }}
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: {{ .Values.name }}
+    spec:
+      containers:
+      - env:
+        - name: FACE_RECO_ENDPOINT
+          valueFrom:
+            configMapKeyRef:
+              key: FACE_RECO_ENDPOINT
+              name: {{ .Values.configmap.name }}
+        - name: YOLO_RECO_ENDPOINT
+          valueFrom:
+            configMapKeyRef:
+              key: YOLO_RECO_ENDPOINT
+              name: {{ .Values.configmap.name }}
+        - name: HOST
+          valueFrom:
+            configMapKeyRef:
+              key: API_SERVICE
+              name: {{ .Values.configmap.name }}
+        - name: PORT
+          valueFrom:
+            configMapKeyRef:
+              key: API_PORT
+              name: {{ .Values.configmap.name }}
+        image: {{ .Values.deployment.image }}
+        imagePullPolicy: IfNotPresent
+        name: {{ .Values.name }}
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /process
+          name: nfs-storage
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: nfs-storage
+        persistentVolumeClaim:
+          claimName: {{ .Values.persistentvolumeclaim.name }}

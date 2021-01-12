@@ -1,0 +1,23 @@
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata: 
+  name: {{ .Values.hpa.name }}
+  namespace: {{ .Values.namespace }}
+spec:
+  minReplicas: {{ .Values.minReplicas }}
+  maxReplicas: {{ .Values.maxReplicas }}
+  metrics: 
+    - type: External
+      external:
+        metric:
+          name: kubernetes.io|container|cpu|core_usage_time
+          selector:
+            matchLabels: 
+              resource.labels.container_name: {{ .Values.name }}
+        target:
+          type: AverageValue
+          averageValue: {{ .Values.hpa.averageValue }}
+  scaleTargetRef: 
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ .Values.name }}
