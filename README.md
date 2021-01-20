@@ -10,4 +10,4 @@ The project includes:
 * [deployment of kubernetes applications using Helm package manager](deploy)
 * [creation of custom Kubernetes metric (GKE)](metrics)
 * [demo of Sidecar design pattern](metrics)
-* [script to provision a Kubernetes cluster in Google Cloud Platform ewnvironment](provision/gke-cluster-create.sh)
+* [script to provision a Kubernetes cluster in Google Cloud Platform environment](provision/gke-cluster-create.sh)

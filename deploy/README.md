@@ -167,8 +167,8 @@ The [install.sh](install.sh)  does the following:
 2. creates a new kubernetes `clusterrolebinding` - this is required in order to deploy the custom-metrics server
 3. installs the custom-metrics server
 4. installs the NVIDIA GPU drivers and plugins
-5. installs the [app-deps](app-deps) Helm Chart - this is the first Helm chart that must be deployed as it installs dependencies which are required by all the other Helm charts
-6. installs the [api](api) Helm Chart
+5. installs the [app-deps](charts/app-deps) Helm Chart - this is the first Helm chart that must be deployed as it installs dependencies which are required by all the other Helm charts
+6. installs the [api](charts/api) Helm Chart
 
 A simplified version of the [install.sh](install.sh) script is presented below.
 

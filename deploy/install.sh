@@ -7,7 +7,7 @@
 #                  * custom metrics server
 #                  * nvidia gpu drivers and plugins
 #                  * apps-deps helm chart (application dependencies required by all other helm charts)
-#                  * api-reco helm chart
+#                  * api helm chart
 #Args           :
 #Author         :Damian McDonald
 #Credits        :Damian McDonald
@@ -62,5 +62,5 @@ helm install ./charts/app-deps --generate-name --namespace=${K8S_NAMESPACE}
 
 # helm install the api-reco chart
 echo ""
-echo -e "Installing Helm Chart for ${YELLOW}api-reco${NC}"
-helm install ./charts/api-reco --generate-name --namespace=${K8S_NAMESPACE}
+echo -e "Installing Helm Chart for ${YELLOW}api${NC}"
+helm install ./charts/api --generate-name --namespace=${K8S_NAMESPACE}
