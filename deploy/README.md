@@ -168,10 +168,7 @@ The [install.sh](install.sh)  does the following:
 3. installs the custom-metrics server
 4. installs the NVIDIA GPU drivers and plugins
 5. installs the [app-deps](app-deps) Helm Chart - this is the first Helm chart that must be deployed as it installs dependencies which are required by all the other Helm charts
-6. installs the [api-reco](api-reco) Helm Chart
-7. installs the [face-reco](face-reco) Helm Chart
-8. installs the [home-reco](home-reco) Helm Chart
-9. installs the [yolo-reco](yolo-reco) Helm Chart
+6. installs the [api](api) Helm Chart
 
 A simplified version of the [install.sh](install.sh) script is presented below.
 
@@ -201,16 +198,7 @@ kubectl apply -f ${NVIDIA_DRIVER_PLUGIN_MANIFEST}
 helm install ./app-deps --generate-name --namespace=${K8S_NAMESPACE}
 
 # helm install the api-reco chart
-helm install ./api-reco --generate-name --namespace=${K8S_NAMESPACE}
-
-# helm install the face-reco chart
-helm install ./face-reco --generate-name --namespace=${K8S_NAMESPACE}
-
-# helm install the yolo-reco chart
-helm install ./yolo-reco --generate-name --namespace=${K8S_NAMESPACE}
-
-# helm install the home-reco chart
-helm install ./home-reco --generate-name --namespace=${K8S_NAMESPACE}
+helm install ./api --generate-name --namespace=${K8S_NAMESPACE}
 ```
 
 # Useful Helm commands
