@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-sidecar
+spec:
+  restartPolicy: Never
+  volumes:
+    - name: log-data
+      emptyDir: {}
+    - name: google-cloud-key
+      secret:
+        secretName: sidecar-key
+  containers:
+    - name: primary-container
+      image: eu.gcr.io/my-gcp-project/primary-app:1.0.0
+      imagePullPolicy: Always
+      volumeMounts:
+        - name: log-data
+          mountPath: /var/logs/myapp
+      env:
+        - name: LOG_FILE
+          value: "/var/logs/myapp/app.log"
+    - name: sidecar-container
+      image: eu.gcr.io/my-gcp-project/sidecar:1.0.0
+      imagePullPolicy: Always
+      volumeMounts:
+        - name: log-data
+          mountPath: /var/logs/myapp
+        - name: google-cloud-key
+          mountPath: /var/secrets/google
+      env:
+        - name: LOG_FILE
+          value: "/var/logs/myapp/app.log"
+        - name: PROJECT_ID
+          value: "prosegur-pga-mpa-poc-ai"
+        - name: METRIC_NAME
+          value: "sidecar_avg_inf_time"
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: /var/secrets/google/key.json

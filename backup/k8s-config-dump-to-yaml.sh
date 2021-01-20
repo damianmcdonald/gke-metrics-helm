@@ -1,5 +1,17 @@
 #!/bin/bash
 
+###################################################################
+#Script Name	  :k8s-config-dump-to-yaml.sh
+#Description	  :Script that reads and dumps the YAML configuration files
+#                for all resources in all namespaces in a Kubernetes cluster
+#Args           :
+#Author         :Damian McDonald
+#License        :GPL
+#Version        :1.0.0
+#Maintainer     :Damian McDonald
+#Status         :Development
+###################################################################
+
 set -e
 
 NAMESPACES=$(kubectl get ns -o jsonpath="{.items[*].metadata.name}")
