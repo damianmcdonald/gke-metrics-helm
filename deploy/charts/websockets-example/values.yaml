@@ -1,0 +1,18 @@
+# Default values for web-sockets.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# Global values
+name: web-socket-example
+namespace: default
+image: eu.gcr.io/my-gcp-project-id/web-socket-test:1.0.0
+containerName: web-socket-test
+port: 8010
+replicas: 3
+
+service:
+  name: web-socket-lb
+  port: 8080
+  targetPort: 8010
+  type: LoadBalancer
+  protocol: TCP
