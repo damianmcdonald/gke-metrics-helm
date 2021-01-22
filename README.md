@@ -11,3 +11,5 @@ The project includes:
 * [creation of custom Kubernetes metric (GKE)](metrics)
 * [demo of Sidecar design pattern](metrics)
 * [script to provision a Kubernetes cluster in Google Cloud Platform environment](provision/gke-cluster-create.sh)
+* [example of a kubernetes StatefulSet](deploy/charts/statefulset-example)
+* [example of websockets with a GKE HTTP External LoadBalancer](websockets)
